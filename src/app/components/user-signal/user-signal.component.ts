@@ -1,4 +1,4 @@
-import { Component, computed, Input, input } from '@angular/core';
+import { Component, computed, Input, input, output } from '@angular/core';
 
 @Component({
   selector: 'app-user-signal',
@@ -10,10 +10,12 @@ import { Component, computed, Input, input } from '@angular/core';
 export class UserSignalComponent {
   avatar = input.required<string>();
   name = input.required<string>();
+  id = input.required<string>();
+  select = output<string>();
 
   imagePath = computed(() => `assets/users/${this.avatar()}`);
 
   onSelectUser() {
-    console.log('Selected user:', this.name);
+    this.select.emit(this.id());
   }
 }
